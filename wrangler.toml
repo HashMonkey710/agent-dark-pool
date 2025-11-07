@@ -1,0 +1,38 @@
+name = "agent-dark-pool"
+main = "src/index.ts"
+compatibility_date = "2024-11-27"
+node_compat = true
+
+# D1 Database binding for private transactions
+[[d1_databases]]
+binding = "DB"
+database_name = "agent-dark-pool-db"
+database_id = "placeholder-will-create"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "development"
+PRIVACY_PREMIUM_PERCENT = "5"
+MAX_BATCH_SIZE = "10"
+BATCH_WINDOW_SECONDS = "30"
+
+# Cron triggers for batch processing
+[triggers]
+crons = [
+  "*/30 * * * *"  # Process batched transactions every 30 seconds
+]
+
+# Observability configuration
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true
+
+[observability.traces]
+enabled = true
+head_sampling_rate = 1
+persist = true
